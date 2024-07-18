@@ -1,0 +1,31 @@
+.form {
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container-secundario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p a {
+    color: #596;
+    text-decoration: none;
+}
+
+.container-secundario p a:hover {
+    color: #000;
+}
+
+.button {
+    margin-right: 5px;
+}
