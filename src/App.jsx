@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Produtos from './pages/Produtos';
 import Galeria from './pages/Galeria';
+import Rodape from './components/Rodape';
+
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+
+      <Rodape/>
     </>
   )
 }

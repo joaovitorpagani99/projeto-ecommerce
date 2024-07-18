@@ -2,9 +2,12 @@ import './Rodape.css';
 
 function Rodape() {
     return (
-        <div>
-            <h1>rodape</h1>
-        </div>
+        <>
+        <hr/>
+        <footer>
+            © 2024. Todos os direitos reservados.
+        </footer>
+    </>
     )
 }
 
