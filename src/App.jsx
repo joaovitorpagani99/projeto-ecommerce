@@ -6,10 +6,10 @@ import Home from './pages/Home';
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import Produtos from './pages/Produtos';
 import Galeria from './pages/Galeria';
 import Rodape from './components/Rodape';
 import { Toaster } from "react-hot-toast";
+import Catalogo from './pages/Catalogo';
 
 
 function App() {
@@ -23,11 +23,14 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path='/login' element={<Login />} />
           <Route path='/galeria' element={<Galeria />} />
-          <Route path='/produtos' element={<Produtos />} />
+          <Route path='/catalogo' element={<Catalogo />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Toaster />
       </BrowserRouter>
+
+
+
 
       <Rodape />
     </>

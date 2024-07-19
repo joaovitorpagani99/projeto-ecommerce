@@ -1,0 +1,21 @@
+h1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+h2{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+.social{
+    text-align: center;
+    margin: 16px;
+}
+
+.Tabela_Precos {
+    margin: 18px;
+}
