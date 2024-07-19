@@ -3,6 +3,7 @@ import './Menu.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UsuarioContext } from '../contexts/UsuarioContext';
+import { logout } from '../firebase/auth';
 
 function Menu() {
     const usuario = useContext(UsuarioContext);
