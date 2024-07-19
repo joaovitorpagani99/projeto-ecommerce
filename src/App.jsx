@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Menu from './components/Menu';
@@ -10,28 +10,42 @@ import Galeria from './pages/Galeria';
 import Rodape from './components/Rodape';
 import { Toaster } from "react-hot-toast";
 import Catalogo from './pages/Catalogo';
-
+import { UsuarioContext } from './contexts/UsuarioContext';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "./firebase/config";
 
 function App() {
+  const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUsuarioLogado(user);
+      setLoading(false);
+    });
+  }, []);
+
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <>
-      <BrowserRouter>
-        <Menu />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/galeria' element={<Galeria />} />
-          <Route path='/catalogo' element={<Catalogo />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+      <UsuarioContext.Provider value={usuarioLogado}>
+        <BrowserRouter>
+          <Menu />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/galeria' element={<Galeria />} />
+            <Route path='/catalogo' element={<Catalogo />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
         <Toaster />
-      </BrowserRouter>
-
-
-
-
+      </UsuarioContext.Provider>
       <Rodape />
     </>
   )
