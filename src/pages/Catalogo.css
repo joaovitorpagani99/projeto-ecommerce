@@ -1,21 +1,8 @@
-h1{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    text-align: center;
+.form-section {
+    width: 320px;
+    margin: 16px auto;
 }
 
-h2{
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    text-align: center;
-}
-
-
-.social{
-    text-align: center;
-    margin: 16px;
-}
-
-.Tabela_Precos {
-    margin: 18px;
+.invalid {
+    color: red;
 }

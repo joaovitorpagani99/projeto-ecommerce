@@ -27,7 +27,7 @@ function Menu() {
                             {usuario && <Link className="nav-link" to='/'>Home</Link>}
                             {!usuario && <Link className="nav-link" to='/login'>Login</Link>}
                             {usuario && <Link className="nav-link" to='/galeria'>Galeria</Link>}
-                            {usuario && <Link className="nav-link" to='/Catalogo'>Catalogo</Link>}
+                            {usuario && <Link className="nav-link" to='/catalogo'>Catalogo</Link>}
                             {usuario && <Button variant="outline-dark" onClick={handleLogout}>
                                 Sair
                             </Button>}
