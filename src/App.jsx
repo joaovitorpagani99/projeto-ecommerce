@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound';
 import Produtos from './pages/Produtos';
 import Galeria from './pages/Galeria';
 import Rodape from './components/Rodape';
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -25,9 +26,10 @@ function App() {
           <Route path='/produtos' element={<Produtos />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
 
-      <Rodape/>
+      <Rodape />
     </>
   )
 }
