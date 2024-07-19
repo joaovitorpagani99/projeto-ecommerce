@@ -1,17 +1,43 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import './Cadastro.css';
-import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { cadastrarUsuario, loginGoogle } from "../firebase/auth";
+import './Cadastro.css';
 
 function Cadastro() {
-
-    const { register, formState: { errors } } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
     const navigate = useNavigate();
+
+    function cadastrar(data) {
+        cadastrarUsuario(data.nome, data.email, data.senha)
+            .then(() => {
+                toast.success(`Bem-vindo(a)! ${data.nome}`);
+                navigate('/produtos');
+            }).catch((error) => {
+                toast.error('aconteceu um erro: ' + error.code);
+            });
+    }
+
+    function handleEntrarGoogle() {
+        loginGoogle().then(() => {
+            toast.success('Usuário cadastrado com sucesso!');
+            navigate('/produtos');
+        }).catch((error) => {
+            console.log('Erro ao cadastrar usuário: ', error.message);
+            toast.error('aconteceu um erro: ' + error.message);
+        });
+    }
 
     return (
         <main className='container-principal'>
             <div className='container-secundario'>
-                <Form className=" form">
+                <form className="form-section mt-5 form" onSubmit={handleSubmit(cadastrar)}>
                     <h1 className='titulo'>Cadastre-se</h1>
                     <div>
                         <label htmlFor="nome">Nome:</label>
@@ -24,14 +50,14 @@ function Cadastro() {
                         {errors.nome && <small className="invalid">O nome é inválido!</small>}
                     </div>
                     <div>
-                        <label htmlFor="endereco">Endereco:</label>
+                        <label htmlFor="endereco">Endereço:</label>
                         <input
                             type="text"
                             id="endereco"
                             className="form-control mt-3"
-                            {...register("nome", { required: true, maxLength: 150 })}
+                            {...register("endereco", { required: true, maxLength: 150 })}
                         />
-                        {errors.nome && <small className="invalid">O nome é inválido!</small>}
+                        {errors.endereco && <small className="invalid">O endereço é inválido!</small>}
                     </div>
                     <div>
                         <label htmlFor="email">Email:</label>
@@ -39,11 +65,9 @@ function Cadastro() {
                             type="email"
                             id="email"
                             className="form-control mt-3"
-                            {...register("email", { required: true })}
+                            {...register("email", { required: true, maxLength: 150 })}
                         />
-                        {errors.email && (
-                            <small className="invalid">O email é inválido!</small>
-                        )}
+                        {errors.email && <small className="invalid">O email é inválido!</small>}
                     </div>
                     <div>
                         <label htmlFor="senha">Senha:</label>
@@ -51,27 +75,22 @@ function Cadastro() {
                             type="password"
                             id="senha"
                             className="form-control mt-3"
-                            {...register("senha", { required: true, minLength: 6 })}
+                            {...register("senha", { required: true, maxLength: 150 })}
                         />
-                        {errors.senha && (
-                            <small className="invalid">A senha é inválida!</small>
-                        )}
+                        {errors.senha && <small className="invalid">A senha é inválido!</small>}
                     </div>
-                    <Button variant="secondary" className="mt-3 w-25 " type="submit">
-                        Cadastrar
-                    </Button>
                     <Button
-                        variant="danger"
-                        className="mt-3 w-25 button"
+                        type="submit"
+                        className='mt-3'>Cadastrar</Button>
+                    <Button
+                        onClick={handleEntrarGoogle}
                         type="button"
-                    >
-                        Entrar com o Google
-                    </Button>
-                </Form>
-
+                        className='mt-3 btn'
+                        variant='danger'>Entrar com Goolgle</Button>
+                </form>
             </div>
         </main>
-    )
+    );
 }
 
 export default Cadastro;

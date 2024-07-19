@@ -1,13 +1,41 @@
 import { Button, Form } from 'react-bootstrap';
 import './Login.css';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { loginGoogle, loginUsuario } from '../firebase/auth';
+
 
 function Login() {
-    const { register, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+
+    function entrar(data) {
+        loginUsuario(data.email, data.senha).then(() => {
+            toast.success('Usuário entrou com sucesso!');
+            navigate('/produtos');
+        }).catch((error) => {
+            console.log('Erro ao entrar: ', error);
+            toast.error("Email e/ou senha incorreta!");
+        });
+    }
+
+    function handleEntrarGoogle() {
+        loginGoogle().then(() => {
+            {
+                toast.success('Usuário entrou com sucesso!');
+                navigate('/produtos');
+            }
+        }).catch((error) => {
+            console.log('Erro ao entrar com Google: ', error);
+            toast.error("Erro ao entrar com Google!");
+        })
+    }
+
     return (
         <main className='container-principal'>
             <div className='container-secundario'>
-                <Form className="mt-5 form">
+                <form className="form-section mt-5 form" onSubmit={handleSubmit(entrar)}>
                     <h1 className='titulo'>Login</h1>
                     <div>
                         <label htmlFor="email">Email:</label>
@@ -15,11 +43,10 @@ function Login() {
                             type="email"
                             id="email"
                             className="form-control mt-3"
-                            {...register("email", { required: true })}
+                            {...register("email", { required: true, maxLength: 150 })}
                         />
-                        {errors.email && (
-                            <small className="invalid">O email é inválido!</small>
-                        )}
+                        {errors.email && <small className="invalid">O endereço é inválido!</small>}
+
                     </div>
                     <div>
                         <label htmlFor="senha">Senha:</label>
@@ -41,13 +68,14 @@ function Login() {
                     </Button>
                     <Button
                         variant="danger"
-                        className="mt-3 mb-5 w-25 button"
+                        className="mt-3 mb-5  button"
                         type="button"
+                        onClick={handleEntrarGoogle}
                     >
                         Entrar com o Google
                     </Button>
                     <p>Não tem cadastro ? <a href='/cadastro'>Cadastre-se</a> </p>
-                </Form>
+                </form>
             </div>
         </main>
     )
