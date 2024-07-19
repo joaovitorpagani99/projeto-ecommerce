@@ -6,11 +6,19 @@ import { UsuarioContext } from '../contexts/UsuarioContext';
 
 function Menu() {
     const usuario = useContext(UsuarioContext);
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        logout().then(() => {
+            navigate("/login");
+        });
+    }
+
 
     return (
         <header>
             <Navbar bg="light" expand="lg">
-                <Container >
+                <Container fluid >
                     <Link to="/" >Logo</Link>
                     <Navbar.Toggle />
                     <Navbar.Collapse>
@@ -19,6 +27,9 @@ function Menu() {
                             {!usuario && <Link className="nav-link" to='/login'>Login</Link>}
                             {usuario && <Link className="nav-link" to='/galeria'>Galeria</Link>}
                             {usuario && <Link className="nav-link" to='/Catalogo'>Catalogo</Link>}
+                            {usuario && <Button variant="outline-dark" onClick={handleLogout}>
+                                Sair
+                            </Button>}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
