@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Menu from './components/Menu';
 import Home from './pages/Home';
@@ -13,6 +12,7 @@ import Catalogo from './pages/Catalogo';
 import { UsuarioContext } from './contexts/UsuarioContext';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from "./firebase/config";
+import './App.css'
 
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
