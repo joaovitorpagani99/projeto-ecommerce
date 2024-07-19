@@ -13,7 +13,7 @@ function Login() {
     function entrar(data) {
         loginUsuario(data.email, data.senha).then(() => {
             toast.success('Usuário entrou com sucesso!');
-            navigate('/produtos');
+            navigate('/');
         }).catch((error) => {
             console.log('Erro ao entrar: ', error);
             toast.error("Email e/ou senha incorreta!");
@@ -24,7 +24,7 @@ function Login() {
         loginGoogle().then(() => {
             {
                 toast.success('Usuário entrou com sucesso!');
-                navigate('/produtos');
+                navigate('/');
             }
         }).catch((error) => {
             console.log('Erro ao entrar com Google: ', error);
