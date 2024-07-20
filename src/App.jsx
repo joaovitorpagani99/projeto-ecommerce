@@ -15,6 +15,7 @@ import { auth } from "./firebase/config";
 import './App.css'
 import Sobre from './pages/Sobre';
 import { Container } from 'react-bootstrap';
+import AdicionarProduto from './pages/AdicionarProduto';
 
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
@@ -43,6 +44,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/galeria' element={<Galeria />} />
             <Route path='/catalogo' element={<Catalogo />} />
+            <Route path='/adicionarProdutos' element={<AdicionarProduto />} />
             <Route path='/sobre' element={<Sobre />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
