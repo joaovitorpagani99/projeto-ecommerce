@@ -62,7 +62,7 @@ function Login() {
                     </div>
                     <Button
                         variant="dark"
-                        className=" button mt-3 mb-5 w-25"
+                        className=" button mt-3"
                         type="submit">
                         Entrar
                     </Button>
