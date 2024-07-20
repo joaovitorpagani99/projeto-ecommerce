@@ -13,6 +13,8 @@ import { UsuarioContext } from './contexts/UsuarioContext';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from "./firebase/config";
 import './App.css'
+import Sobre from './pages/Sobre';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
@@ -31,9 +33,8 @@ function App() {
   }
 
   return (
-    <>
-    
-      <UsuarioContext.Provider value={usuarioLogado}>
+    <UsuarioContext.Provider value={usuarioLogado} >
+      <div className='min-heigth'>
         <BrowserRouter>
           <Menu />
           <Routes>
@@ -42,13 +43,14 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/galeria' element={<Galeria />} />
             <Route path='/catalogo' element={<Catalogo />} />
+            <Route path='/sobre' element={<Sobre />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
         <Toaster />
-      </UsuarioContext.Provider>
+      </div>
       <Rodape />
-    </>
+    </UsuarioContext.Provider>
   )
 }
 
