@@ -18,7 +18,7 @@ function Cadastro() {
         cadastrarUsuario(data.nome, data.email, data.senha)
             .then(() => {
                 toast.success(`Bem-vindo(a)! ${data.nome}`);
-                navigate('/produtos');
+                navigate('/');
             }).catch((error) => {
                 toast.error('aconteceu um erro: ' + error.code);
             });
@@ -27,7 +27,7 @@ function Cadastro() {
     function handleEntrarGoogle() {
         loginGoogle().then(() => {
             toast.success('Usuário cadastrado com sucesso!');
-            navigate('/produtos');
+            navigate('/');
         }).catch((error) => {
             console.log('Erro ao cadastrar usuário: ', error.message);
             toast.error('aconteceu um erro: ' + error.message);

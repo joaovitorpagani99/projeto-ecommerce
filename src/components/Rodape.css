@@ -1,6 +1,7 @@
 footer {
     font-family: Arial, Helvetica, sans-serif;
-    background-color:  rgb(155, 152, 152);
-    margin: 16px;
+    background-color: rgb(155, 152, 152);
+    padding: 10px;
     text-align: center;
+    width: 100%;
 }

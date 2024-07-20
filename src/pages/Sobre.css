@@ -1,0 +1,28 @@
+.sobre-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.sobre-container h1 {
+    margin-bottom: 20px;
+}
+
+.sobre-container p {
+    margin-bottom: 20px;
+}
+
+.sobre-container section {
+    margin-bottom: 40px;
+}
+
+.sobre-container h2 {
+    margin-bottom: 10px;
+}
