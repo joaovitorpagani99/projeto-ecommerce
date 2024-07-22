@@ -14,11 +14,12 @@ function Cadastro() {
     } = useForm();
     const navigate = useNavigate();
 
+
     function cadastrar(data) {
         cadastrarUsuario(data.nome, data.email, data.senha)
             .then(() => {
-                toast.success(`Bem-vindo(a)! ${data.nome}`);
-                navigate('/');
+                toast.success('Usuário cadastrado com sucesso! Por favor, verifique seu email.');
+                navigate('/login');
             }).catch((error) => {
                 toast.error('aconteceu um erro: ' + error.code);
             });
