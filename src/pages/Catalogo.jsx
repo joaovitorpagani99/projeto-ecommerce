@@ -1,6 +1,7 @@
 import './Catalogo.css'
 import { Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { addProdutos } from '../firebase/produtos';
 import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
@@ -14,10 +15,29 @@ function Catalogo() {
 
     const navigate = useNavigate()
 
+    function salvarProduto(data) {
+        data.idUsuario = usuario.uid 
+
+        addProdutos(data)
+        .then(() => {
+            toast.success("Compra realizada com sucesso!")
+
+            navigate("/meus-pedidos")
+        }).catch(() => {
+            toast.error("Um erro aconteceu ao comprar o produto")
+        })
+
+
+    }
+
+    if(usuario === null) {
+        return <Navigate to="/login"/>
+    }
+
 
     return (
         <main>
-            <form className="form-section">
+            <form className="form-section" onSubmit={handleSubmit(salvarProduto)}>
                 <h1>Catalógo de produtos</h1>
                 <hr></hr>
                 <div>
