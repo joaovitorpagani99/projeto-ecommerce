@@ -1,11 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './AdicionarProdutos.css';
 import { useForm } from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { addProdutos, uploadImagem } from '../firebase/produtos';
+import { useContext } from 'react';
+import { UsuarioContext } from '../contexts/UsuarioContext';
 
-function AdicionarProduto(props) {
+function AdicionarProduto() {
     const {
         register,
         handleSubmit,
@@ -13,6 +15,11 @@ function AdicionarProduto(props) {
     } = useForm();
 
     const navigate = useNavigate();
+    const usuario = useContext(UsuarioContext);
+
+    if (usuario === null) {
+        return <Navigate to='/login' />
+    }
 
 
     function adicionarProduto(data) {

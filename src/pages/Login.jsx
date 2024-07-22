@@ -12,6 +12,7 @@ function Login() {
 
     function entrar(data) {
         loginUsuario(data.email, data.senha).then(() => {
+            console.log(data)
             toast.success('Usuário entrou com sucesso!');
             navigate('/');
         }).catch((error) => {
