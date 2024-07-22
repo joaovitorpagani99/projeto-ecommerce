@@ -26,7 +26,7 @@ function Produtos() {
         const deletar = confirm("tem certeza ?")
         if(deletar) {
             deletarProduto(id).then(() => {
-                toast.success("Produto cancelado com sucesso!")
+                toast.success("Compra cancelada com sucesso!")
 
                 carregarProdutos()
             })
@@ -61,7 +61,7 @@ function Produtos() {
                                     <Card.Text>{produto.endereco}</Card.Text>
                                     <Card.Text>{produto.observacoes}</Card.Text>
                                     <Button variant="dark" onClick={() => {
-                                        navigate(`/alterar-pedido ${produto.id}` )
+                                        navigate(`/alterar-pedido/${produto.id}` )
                                     }}>Alterar Pedido</Button>
                                     <Button variant="danger" onClick={() => {
                                         deletaProduto(produto.id)

@@ -48,7 +48,7 @@ function App() {
             <Route path='/catalogo' element={<Catalogo />} />
             <Route path='/meus-pedidos' element={<Produtos/>}/>
             <Route path='/adicionarProdutos' element={<AdicionarProduto />} />
-            <Route path='alterar-pedido/id' element={<AlterarProduto/>}/>
+            <Route path='alterar-pedido/:id' element={<AlterarProduto/>}/>
             <Route path='/sobre' element={<Sobre />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
