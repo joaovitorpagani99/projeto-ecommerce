@@ -1,38 +1,47 @@
 import './Catalogo.css'
 import { Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { addProdutos } from '../firebase/produtos';
 import toast from 'react-hot-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UsuarioContext } from '../contexts/UsuarioContext';
+import { addProdutoCarrinho } from '../firebase/carrinho';
+import { getProdutos } from '../firebase/produtos';
 
 function Catalogo() {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
-
     const usuario = useContext(UsuarioContext)
-
     const navigate = useNavigate()
+    const [produtos, setProdutos] = useState([]);
 
     function salvarProduto(data) {
-        data.idUsuario = usuario.uid 
-
-        addProdutos(data)
-        .then(() => {
-            toast.success("Compra realizada com sucesso!")
-
-            navigate("/meus-pedidos")
-        }).catch(() => {
-            toast.error("Um erro aconteceu ao comprar o produto")
-        })
-
-
+        console.log(data);
+        data.idUsuario = usuario.uid
+        addProdutoCarrinho(data)
+            .then(() => {
+                toast.success("Compra realizada com sucesso!")
+                navigate("/meus-pedidos")
+            }).catch(() => {
+                toast.error("Um erro aconteceu ao comprar o produto")
+            })
     }
 
-    if(usuario === null) {
-        return <Navigate to="/login"/>
+    if (usuario === null) {
+        return <Navigate to="/login" />
     }
+    function carregarDados() {
+        getProdutos().then((produtos) => {
+            setProdutos(produtos);
+        }).catch((error) => {
+            console.error("Erro ao carregar produtos:", error);
+        });
+    }
+
+    useEffect(() => {
+        carregarDados();
+    }, []);
+
 
 
     return (
@@ -47,18 +56,11 @@ function Catalogo() {
                         {...register("eletronicos")}
                     >
                         <option value="" ></option>
-                        <option value="EFlydigi-Apex-4" >EFlydigi Apex 4</option>
-                        <option value="Meta-Quest-3" >Meta Quest 3</option>
-                        <option value="Flydigi-B6-Lite" >Flydigi B6 Lite</option>
-                        <option value="ROG-Ally" >ROG Ally</option>
-                        <option value="Philips-SHP9500" >Philips SHP9500</option>
-                        <option value="Flydigi-Phone-Holder" >Flydigi Phone Holder</option>
-                        <option value="Flydigi-Apex-3-Elite" >Flydigi Apex 3 Elite</option>
-                        <option value="EFlydigi-Apex-4" >EFlydigi Apex 4</option>
-                        <option value="Loona-Cão-de-Estimação" >Loona Cão de Estimação</option>
-                        <option value="Mobilador-Flydigi-Q1" >Mobilador Flydigi Q1</option>
-                        <option value="ASUS-ROG-Ally-X" >ASUS ROG Ally X</option>
-                        <option value="iPad-Pro-Apple" >iPad Pro Apple</option>
+                        {produtos.map((produto) => (
+                            <option key={produto.id} value={produto.nomeProduto}>
+                                {produto.nomeProduto}
+                            </option>
+                        ))}
                     </select>
                     <div>
                         <label htmlFor="estado">Selecione seu estado:</label>

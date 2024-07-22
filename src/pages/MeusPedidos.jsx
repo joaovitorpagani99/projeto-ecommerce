@@ -1,46 +1,49 @@
 import { Badge, Button, Card, Container } from "react-bootstrap";
 import { Link, Navigate } from "react-router-dom";
-import { deletarProduto, getProdutos, getProdutosUsuario } from "../firebase/produtos";
 import { useContext, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UsuarioContext } from "../contexts/UsuarioContext";
+import { deleteProdutoCarrinho, getProdutosCarrinho, getProdutosUsuario } from "../firebase/carrinho";
 
-function Produtos() {
-    const [produtos, setProdutos] = useState(null)
+function MeusPedidos() {
 
+    const [pedidos, setPedidos] = useState(null)
     const usuario = useContext(UsuarioContext)
-
     const navigate = useNavigate()
 
-    function carregarProdutos() {
-        if(usuario) {
-            getProdutosUsuario(usuario.uid).then((resultados) => {
-                setProdutos(resultados)
-            })
+    async function carregarPedidos() {
+        if (usuario) {
+            if (usuario.email === 'admin@admin.com.br') {
+                const resultados = await getProdutosCarrinho();
+                setPedidos(resultados);
+            } else {
+                const resultados = await getProdutosUsuario(usuario.uid);
+                setPedidos(resultados);
+            }
         }
     }
 
-    function deletaProduto(id) {
-        const deletar = confirm("tem certeza ?")
-        if(deletar) {
-            deletarProduto(id).then(() => {
-                toast.success("Compra cancelada com sucesso!")
-
-                carregarProdutos()
-            })
-
-
+    function deletarPedido(id) {
+        const deletar = confirm("tem certeza ?");
+        if (deletar) {
+            deleteProdutoCarrinho(id).then(() => {
+                toast.success("Compra cancelada com sucesso!");
+                carregarPedidos();
+            }).catch((error) => {
+                console.log(error);
+                toast.error("Um erro aconteceu ao cancelar a compra");
+                carregarPedidos();
+            });
         }
     }
-
     useEffect(() => {
-        carregarProdutos()
+        carregarPedidos()
     }, [])
 
-    if(usuario === null) {
-        return <Navigate to="/login"/>
+    if (usuario === null) {
+        return <Navigate to="/login" />
     }
 
     return (
@@ -50,21 +53,22 @@ function Produtos() {
                 <hr />
                 <Link className="btn btn-dark" to="/catalogo">Acessar Catalogo</Link>
                 {
-                    produtos ? <section className="mt-2">
-                        {produtos.map((produto) => {
-                            return <Card key={produto.id}>
+                    pedidos ? <section className="mt-2">
+                        {pedidos.map((pedido) => {
+                            return <Card key={pedido.id}>
                                 <Card.Body>
-                                    <Badge>{produto.eletronicos}</Badge>
-                                    <Badge>{produto.estado}</Badge>
-                                    <Card.Text>{produto.cidade}</Card.Text>
-                                    <Card.Text>{produto.bairro}</Card.Text>
-                                    <Card.Text>{produto.endereco}</Card.Text>
-                                    <Card.Text>{produto.observacoes}</Card.Text>
+                                    <Badge>{pedido.eletronicos}</Badge>
+                                    <Badge>{pedido.estado}</Badge>
+                                    <Card.Text>{pedido.cidade}</Card.Text>
+                                    <Card.Text>{pedido.bairro}</Card.Text>
+                                    <Card.Text>{pedido.endereco}</Card.Text>
+                                    <Card.Text>{pedido.observacoes}</Card.Text>
                                     <Button variant="dark" onClick={() => {
-                                        navigate(`/alterar-pedido/${produto.id}` )
+                                        navigate(`/alterar-pedido/${pedido.id}`)
+                                        console.log(pedido.id)
                                     }}>Alterar Pedido</Button>
                                     <Button variant="danger" onClick={() => {
-                                        deletaProduto(produto.id)
+                                        deletarPedido(pedido.id)
                                     }}>Cancelar Compra</Button>
                                 </Card.Body>
                             </Card>
@@ -76,4 +80,4 @@ function Produtos() {
     )
 }
 
-export default Produtos
+export default MeusPedidos;

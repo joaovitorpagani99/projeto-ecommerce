@@ -16,8 +16,8 @@ import './App.css'
 import Sobre from './pages/Sobre';
 import { Container } from 'react-bootstrap';
 import AdicionarProduto from './pages/AdicionarProduto';
-import Produtos from './pages/MeusPedidos';
-import AlterarProduto from './pages/AlterarPedido';
+import MeusPedidos from './pages/MeusPedidos';
+import AlterarPedido from './pages/AlterarPedido';
 
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
@@ -46,9 +46,10 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/galeria' element={<Galeria />} />
             <Route path='/catalogo' element={<Catalogo />} />
-            <Route path='/meus-pedidos' element={<Produtos/>}/>
+            <Route path='/catalogo/:id' element={<Catalogo />} />
+            <Route path='/meus-pedidos' element={<MeusPedidos />} />
             <Route path='/adicionarProdutos' element={<AdicionarProduto />} />
-            <Route path='alterar-pedido/:id' element={<AlterarProduto/>}/>
+            <Route path='/alterar-pedido/:id' element={<AlterarPedido />} />
             <Route path='/sobre' element={<Sobre />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
@@ -56,7 +57,7 @@ function App() {
         </BrowserRouter>
         <Toaster position='bottom-right' />
       </div>
-      
+
     </UsuarioContext.Provider>
   )
 }

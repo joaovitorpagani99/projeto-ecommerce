@@ -3,7 +3,7 @@ import './AdicionarProdutos.css';
 import { useForm } from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import toast from 'react-hot-toast';
-import { addProdutos, uploadImagem } from '../firebase/produtos';
+import { addProdutos, uploadImagem,  } from '../firebase/produtos';
 import { useContext } from 'react';
 import { UsuarioContext } from '../contexts/UsuarioContext';
 
@@ -59,7 +59,7 @@ function AdicionarProduto() {
                     <label htmlFor='precoProduto'>Preço: </label>
                     <input
                         id="precoProduto"
-                        type="number"
+                        type="text"
                         placeholder="Preço do produto"
                         className="form-control mt-3"
                         {...register("precoProduto", { required: true, maxLength: 150 })}
