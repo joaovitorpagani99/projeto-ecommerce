@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, updateDoc, query, where, deleteDoc } from "firebase/firestore";
 import { db } from "./config";
 //import { storage } from "./config";
 //import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -33,7 +33,7 @@ export async function getProdutos() {
 
 export async function getProdutosUsuario(idUsuario) {
     const filtro = query(colecaoProdutos, where("idUsuario", "==", idUsuario));
-    const snapshot = await getDoc(filtro);
+    const snapshot = await getDocs(filtro);
     const produtos = []
 
     snapshot.forEach((doc) => {
