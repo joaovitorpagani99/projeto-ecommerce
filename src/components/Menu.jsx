@@ -28,6 +28,7 @@ function Menu() {
                             <Link className="nav-link" to='/galeria'>Galeria</Link>
                             {usuario && <Link className="nav-link" to='/catalogo'>Catalogo</Link>}
                             {usuario && usuario.email === 'admin@admin.com.br' && <Link className="nav-link" to='/adicionarProdutos'>Adicionar Produto</Link>}
+                            {usuario && <Link className="nav-link" to='/meus-pedidos'>Meus Pedidos</Link>}
                             <Link className="nav-link" to='/Sobre'>Sobre</Link>
                             {usuario && <Button variant="outline-dark" onClick={handleLogout}>
                                 Sair

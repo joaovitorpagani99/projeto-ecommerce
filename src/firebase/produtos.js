@@ -1,18 +1,18 @@
 import { addDoc, collection, doc, getDoc, getDocs, updateDoc, query, where, deleteDoc } from "firebase/firestore";
 import { db } from "./config";
-//import { storage } from "./config";
-//import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "./config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const colecaoProdutos = collection(db, "produtos");
 
-/*export async function addProdutos(data, imagemUrl) {
+export async function addProdutos(data, imagemUrl) {
     data.imageUrl = imagemUrl;
     return await addDoc(colecaoProdutos, data);
-}*/
-
-export async function addProdutos(data) {
-    await addDoc(colecaoProdutos, data)
 }
+
+// export async function addProdutos(data) {
+//     await addDoc(colecaoProdutos, data)
+// }
 
 export async function uploadImagem(file) {
     const storageRef = ref(storage, `imagens/${file.name}`);
@@ -25,8 +25,9 @@ export async function uploadImagem(file) {
 export async function getProdutos() {
     const snapshot = await getDocs(colecaoProdutos);
     const produtos = [];
+    console.log(snapshot);
     snapshot.forEach((doc) => {
-        produtos.push({ ...doc.data(), id:doc.id });
+        produtos.push({ ...doc.data(), id: doc.id });
     });
     return produtos;
 }
@@ -37,11 +38,10 @@ export async function getProdutosUsuario(idUsuario) {
     const produtos = []
 
     snapshot.forEach((doc) => {
-        produtos.push({...doc.data(), id: doc.id})
+        produtos.push({ ...doc.data(), id: doc.id })
     })
 
     return produtos
-    
 }
 
 export async function deletarProduto(id) {
@@ -52,7 +52,6 @@ export async function deletarProduto(id) {
 export async function getProduto(id) {
     const produtoDoc = doc(colecaoProdutos, id)
     const snapshot = await getDoc(produtoDoc)
-
     return snapshot.data()
 }
 

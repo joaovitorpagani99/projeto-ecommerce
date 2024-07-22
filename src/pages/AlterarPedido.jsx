@@ -6,24 +6,34 @@ import { getProduto, updateProduto } from "../firebase/produtos";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { UsuarioContext } from "../contexts/UsuarioContext";
-
-function AlterarProduto() {
-    const {id} = useParams()
-    const usuario = useContext(UsuarioContext)
+import { getProdutosCarrinho, updateCarrinho } from '../firebase/carrinho'
+function AlterarPedido() {
+    const { id } = useParams();
+    const usuario = useContext(UsuarioContext);
 
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
         reset
     } = useForm()
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    function carregarDado() {
-        getProduto(id).then((produto) => {
-            if(produto) {
-                reset(produto)
+    // function carregarDados() {
+    //     getProduto(id).then((produto) => {
+    //         if (produto) {
+    //             reset(produto)
+    //         } else {
+    //             navigate("/meus-pedidos")
+    //         }
+    //     })
+    // }
+
+    function carregarDados() {
+        getProdutosCarrinho(id).then((carrinho) => {
+            if (carrinho) {
+                reset(carrinho)
             } else {
                 navigate("/meus-pedidos")
             }
@@ -31,25 +41,28 @@ function AlterarProduto() {
     }
 
     function atualizarProduto(data) {
-        updateProduto(id, data).then(() => {
-            toast.success("Produto alterado com sucesso")
+        updateCarrinho(id, data[0]).then(() => {
+            toast.success("Compra alterada com sucesso")
             navigate("/meus-pedidos")
+        }).catch((error) => {
+            console.log(error)
+            toast.error("Erro ao alterar a compra")
         })
     }
 
     useEffect(() => {
-        carregarDado()
+        carregarDados()
     }, [])
 
-    if(usuario === null) {
-        return <Navigate to="/login"/>
+    if (usuario === null) {
+        return <Navigate to="/login" />
     }
 
 
     return (
         <main>
             <form className="form-section" onSubmit={handleSubmit(atualizarProduto)}>
-                <h1>Alterar Produtos</h1>
+                <h1>Alterar Compra</h1>
                 <hr></hr>
                 <div>
                     <label htmlFor="eletronicos">Selecione o produto desejado:</label>
@@ -112,7 +125,7 @@ function AlterarProduto() {
                             type="text"
                             id="cidade"
                             className="form-control"
-                            {...register("cidade", { required: true, maxLength: 200 })}
+                            {...register("cidade", { maxLength: 200 })}
                         />
                         {errors.titulo && <small className="invalid">A cidade é invalido</small>}
                     </div>
@@ -122,7 +135,7 @@ function AlterarProduto() {
                             type="text"
                             id="bairro"
                             className="form-control"
-                            {...register("bairro", { required: true, maxLength: 200 })}
+                            {...register("bairro", { maxLength: 200 })}
                         />
                         {errors.titulo && <small className="invalid">O Bairro é invalido</small>}
                     </div>
@@ -132,7 +145,7 @@ function AlterarProduto() {
                             type="text"
                             id="endereco"
                             className="form-control"
-                            {...register("endereco", { required: true, maxLength: 200 })}
+                            {...register("endereco", { maxLength: 200 })}
                         />
                         {errors.titulo && <small className="invalid">O endereço é invalido</small>}
                     </div>
@@ -164,6 +177,6 @@ function AlterarProduto() {
     )
 }
 
-export default AlterarProduto
+export default AlterarPedido;
 
 
