@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { UsuarioContext } from "../contexts/UsuarioContext";
 import { getProdutosCarrinho, updateCarrinho } from '../firebase/carrinho'
+import "./AlterarPedido.css"
+
 function AlterarPedido() {
     const { id } = useParams();
     const usuario = useContext(UsuarioContext);
@@ -60,7 +62,7 @@ function AlterarPedido() {
 
 
     return (
-        <main>
+        <main className="alterar">
             <form className="form-section" onSubmit={handleSubmit(atualizarProduto)}>
                 <h1>Alterar Compra</h1>
                 <hr></hr>
