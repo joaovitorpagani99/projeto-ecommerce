@@ -16,7 +16,6 @@ function Catalogo() {
     const [produtos, setProdutos] = useState([]);
 
     function salvarProduto(data) {
-        console.log(data);
         data.idUsuario = usuario.uid
         addProdutoCarrinho(data)
             .then(() => {
@@ -127,7 +126,7 @@ function Catalogo() {
                         />
                         {errors.titulo && <small className="invalid">O endereço é invalido</small>}
                     </div>
-                  
+
                     <div>
                         <label htmlFor="observacoes">Observaçoes</label>
                         <textarea
@@ -139,8 +138,6 @@ function Catalogo() {
                     </div>
 
                 </div>
-
-
                 <Button variant="dark" className="w-100 mt-1" type="submit">Finalizar Compra</Button>
             </form>
         </main>

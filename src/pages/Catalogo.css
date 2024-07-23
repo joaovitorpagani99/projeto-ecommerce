@@ -1,13 +1,8 @@
 .form-section {
     width: 400px;
     margin: 16px auto;
-    color: white;
-}
-
-.invalid {
-    color: red;
 }
 
 .catalogo {
-    background-color: black;
+    background-color: #f8f9fa;
 }

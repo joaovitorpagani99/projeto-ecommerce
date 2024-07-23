@@ -48,7 +48,7 @@ function MeusPedidos() {
     }
 
     return (
-        <main>
+        <main className="containerPrincipal">
             <Container>
                 <h1>Meus Pedidos</h1>
                 <hr />
@@ -59,7 +59,7 @@ function MeusPedidos() {
                             return <Card key={pedido.id}>
                                 <Card.Body className="pedido">
                                     <Badge className="eletro">{pedido.eletronicos}</Badge>
-                                    <br/>
+                                    <br />
                                     <Badge className="estado">{pedido.estado}</Badge>
                                     <Card.Text className="textos">{pedido.cidade}</Card.Text>
                                     <Card.Text className="textos">{pedido.bairro}</Card.Text>

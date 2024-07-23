@@ -14,7 +14,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from "./firebase/config";
 import './App.css'
 import Sobre from './pages/Sobre';
-import { Container } from 'react-bootstrap';
 import AdicionarProduto from './pages/AdicionarProduto';
 import MeusPedidos from './pages/MeusPedidos';
 import AlterarPedido from './pages/AlterarPedido';

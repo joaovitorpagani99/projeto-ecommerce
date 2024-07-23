@@ -36,7 +36,7 @@ function Login() {
     return (
         <main className='container-principal'>
             <div className='container-secundario'>
-                <form className="form-section mt-5 form" onSubmit={handleSubmit(entrar)}>
+                <form className="form-section mt-1 form" onSubmit={handleSubmit(entrar)}>
                     <h1 className='titulo'>Login</h1>
                     <div>
                         <label htmlFor="email">Email:</label>
@@ -63,13 +63,13 @@ function Login() {
                     </div>
                     <Button
                         variant="dark"
-                        className=" button mt-3"
+                        className=" button mt-3 mb-3"
                         type="submit">
                         Entrar
                     </Button>
                     <Button
                         variant="danger"
-                        className="mt-3 mb-5  button"
+                        className="mt-3 mb-3 "
                         type="button"
                         onClick={handleEntrarGoogle}
                     >
