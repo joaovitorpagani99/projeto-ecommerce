@@ -10,7 +10,6 @@ function Home() {
     function carregarDados() {
         getProdutos().then((produtos) => {
             setProdutos(produtos);
-            console.log(produtos);
         });
     }
 
@@ -19,27 +18,27 @@ function Home() {
     }, []);
 
     return (
-        <>
-        <Carousel variant='dark'>
-            {produtos.map((produtos) => (
-                <Carousel.Item key={produtos.id} interval={1200}>
-                    <img
-                        className="d-block mx-auto"
-                        src={produtos.imageUrl}
-                    />
-                    <Carousel.Caption>
-                        <p className='text-secondary'>{produtos.descricaoProduto}</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            ))}
-        </Carousel>
-        <div>
-        <Galeria></Galeria>
-    </div>
-    </>
+        <main>
+            <Carousel variant='dark'>
+                {produtos.map((produtos) => (
+                    <Carousel.Item key={produtos.id} interval={1200}>
+                        <img
+                            className="d-block mx-auto"
+                            src={produtos.imageUrl}
+                        />
+                        <Carousel.Caption>
+                            <p className='text-secondary'>{produtos.descricaoProduto}</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
+            <div>
+                <Galeria></Galeria>
+            </div>
+        </main>
     );
-    
-    
+
+
 }
 
 
