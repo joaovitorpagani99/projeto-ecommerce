@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UsuarioContext } from "../contexts/UsuarioContext";
 import { deleteProdutoCarrinho, getProdutosCarrinho, getProdutosUsuario } from "../firebase/carrinho";
+import "./MeusPedidos.css"
 
 function MeusPedidos() {
 
@@ -56,13 +57,14 @@ function MeusPedidos() {
                     pedidos ? <section className="mt-2">
                         {pedidos.map((pedido) => {
                             return <Card key={pedido.id}>
-                                <Card.Body>
-                                    <Badge>{pedido.eletronicos}</Badge>
-                                    <Badge>{pedido.estado}</Badge>
-                                    <Card.Text>{pedido.cidade}</Card.Text>
-                                    <Card.Text>{pedido.bairro}</Card.Text>
-                                    <Card.Text>{pedido.endereco}</Card.Text>
-                                    <Card.Text>{pedido.observacoes}</Card.Text>
+                                <Card.Body className="pedido">
+                                    <Badge className="eletro">{pedido.eletronicos}</Badge>
+                                    <br/>
+                                    <Badge className="estado">{pedido.estado}</Badge>
+                                    <Card.Text className="textos">{pedido.cidade}</Card.Text>
+                                    <Card.Text className="textos">{pedido.bairro}</Card.Text>
+                                    <Card.Text className="textos">{pedido.endereco}</Card.Text>
+                                    <Card.Text className="textos">{pedido.observacoes}</Card.Text>
                                     <Button variant="dark" onClick={() => {
                                         navigate(`/alterar-pedido/${pedido.id}`)
                                         console.log(pedido.id)

@@ -6,8 +6,8 @@ function Galeria() {
 
 
     return (
-        <div>
-            <h1>Galeria</h1>
+        <div className='galeria'>
+            <h1 className='g1'>Conheça alguns de nossos produtos</h1>
             <Cards></Cards>
         </div >
     )

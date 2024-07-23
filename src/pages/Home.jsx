@@ -2,6 +2,7 @@ import './Home.css';
 import Carousel from 'react-bootstrap/Carousel';
 import { getProdutos } from '../firebase/produtos'
 import { useEffect, useState } from 'react';
+import Galeria from './Galeria';
 
 function Home() {
     const [produtos, setProdutos] = useState([]);
@@ -18,6 +19,7 @@ function Home() {
     }, []);
 
     return (
+        <>
         <Carousel variant='dark'>
             {produtos.map((produtos) => (
                 <Carousel.Item key={produtos.id} interval={1200}>
@@ -31,7 +33,13 @@ function Home() {
                 </Carousel.Item>
             ))}
         </Carousel>
+        <div>
+        <Galeria></Galeria>
+    </div>
+    </>
     );
+    
+    
 }
 
 

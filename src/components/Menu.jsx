@@ -25,7 +25,7 @@ function Menu() {
                         <Nav className="ms-auto">
                             <Link className="nav-link" to='/'>Home</Link>
                             {!usuario && <Link className="nav-link" to='/login'>Login</Link>}
-                            <Link className="nav-link" to='/galeria'>Galeria</Link>
+                           
                             {usuario && <Link className="nav-link" to='/catalogo'>Catalogo</Link>}
                             {usuario && usuario.email === 'admin@admin.com.br' && <Link className="nav-link" to='/adicionarProdutos'>Adicionar Produto</Link>}
                             {usuario && <Link className="nav-link" to='/meus-pedidos'>Meus Pedidos</Link>}

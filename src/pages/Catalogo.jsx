@@ -45,7 +45,7 @@ function Catalogo() {
 
 
     return (
-        <main>
+        <main className='catalogo'>
             <form className="form-section" onSubmit={handleSubmit(salvarProduto)}>
                 <h1>Catalógo de produtos</h1>
                 <hr></hr>
@@ -127,15 +127,7 @@ function Catalogo() {
                         />
                         {errors.titulo && <small className="invalid">O endereço é invalido</small>}
                     </div>
-                    <div>
-                        <label htmlFor="dataCompra">Data da compra:</label>
-                        <input
-                            type="date"
-                            id="dataCompra"
-                            className="form-control"
-                            {...register("dataCompra")}
-                        />
-                    </div>
+                  
                     <div>
                         <label htmlFor="observacoes">Observaçoes</label>
                         <textarea
